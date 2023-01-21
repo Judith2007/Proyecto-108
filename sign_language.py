@@ -28,10 +28,6 @@ while True:
 
                 x,y = int(lm_list[tip].x*w), int(lm_list[tip].y*h)
                 cv2.circle(img, (x,y), 15, (255,0,0), cv2.FILLED)
-                
-            mp_draw.draw_landmarks(img, hand_landmark,
-            mp_hands.HAND_CONNECTIONS, mp_draw.DrawingSpec((0,0,255),2,2),
-            mp_draw.DrawingSpec((0,255,0),4,2))
 
     if lm_list[tip].x < lm_list[tip - 3].x:
         cv2.circle(img,(x,y), 15, (0,255,0), cv2.FILLED)
@@ -46,6 +42,10 @@ while True:
         if lm_list[thumb_tip].y > lm_list[thumb_tip-1].y > lm_list[thumb_tip-2].y:
             print("No me gusta")
             cv2.putText(img, "No me gusta", (20,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 3)
+            
+            mp_draw.draw_landmarks(img, hand_landmark,
+            mp_hands.HAND_CONNECTIONS, mp_draw.DrawingSpec((0,0,255),2,2),
+            mp_draw.DrawingSpec((0,255,0),4,2))
 
     cv2.imshow("Rastreo de manos", img)
     cv2.waitKey(1)
